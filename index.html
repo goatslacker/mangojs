@@ -1,0 +1,41 @@
+<html>
+<head>
+<link href="mango.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<pre>
+<code>
+  var x = 12;
+  function Foo() {
+    if (true) {
+      return "Hello World";
+    } else {
+      // we return something else
+      return Number(x);
+    }
+  }
+  class something extends somethingelse {
+    doStuff() {
+    }
+  }
+  var foo = {
+    a: 1,
+    b: "string",
+    c: 3.14,
+    d: new Object(),
+    e: [],
+    f: {},
+    g: 2 * 2,
+    h: function () {
+      return 12;
+    },
+    i: !2,
+    j: 0
+  };
+  var regex = /[A-Za-z\n]/g
+  var h = Foo();
+  h.prototype = Object.create(Object.prototype);
+</code>
+</pre>
+</body>
+<script type="text/javascript" src="mango.js"></script>

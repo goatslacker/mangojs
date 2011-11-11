@@ -1,0 +1,47 @@
+code, body {
+  font-family: Inconsolata;
+  font-weight: 400;
+  font-size: 16px;
+  background: #282828;
+  color: white;
+}
+
+code .keyword {
+  color: #daa520;
+}
+
+code .global {
+  color: #67BDF8;
+}
+
+code .constant {
+  color: #4fb7c5;
+}
+
+code .conditional {
+  color: #FCD587;
+}
+
+code .number, code .true, code .false {
+  color: #F55E5F;
+}
+
+code .boolean {
+  color: #D45D57;
+}
+
+code .future {
+  color: #4C5354;
+}
+
+code .function, code .prototype {
+  color: #E673C7;
+}
+
+code .string, code .regex {
+  color: #87AF5F;
+}
+
+code .comment {
+  color: #656865;
+}
