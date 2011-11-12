@@ -118,10 +118,15 @@
   var codes = document.querySelectorAll("code");
 
   forEach.call(codes, function (code) {
+    if (code.className === "mangojs") {
+      return;
+    }
+
     var src = code.innerText;
     var tokens = new Tokens();
     lex(src, tokens);
     code.innerHTML = tokens.get();
+    code.className = "mangojs";
   });
 
 }());

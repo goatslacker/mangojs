@@ -2,10 +2,11 @@
 <head>
 <link href="mango.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body contenteditable="true">
 <pre>
 <code>
   var x = 12;
+
   function Foo() {
     if (true) {
       return "Hello World";
@@ -14,10 +15,34 @@
       return Number(x);
     }
   }
+
+  Foo.prototype = Object.create(String.prototype);
+  Foo.prototype.hello = function () {
+    return "World";
+  };
+
+  var h = new Foo();
+  if (h.hello() === "World") {
+    try {
+      doWork();
+    } catch (e) {
+      // error!
+    }
+  } else {
+    var fib = function (n) {
+      if (n === 1 || n === 0) {
+        return 1;
+      } else {
+        return fib(n - 1) + fib(n - 2);
+      }
+    };
+  }
+
   class something extends somethingelse {
     doStuff() {
     }
   }
+
   var foo = {
     a: 1,
     b: "string",
@@ -32,9 +57,8 @@
     i: !2,
     j: 0
   };
+
   var regex = /[A-Za-z\n]/g
-  var h = Foo();
-  h.prototype = Object.create(Object.prototype);
 </code>
 </pre>
 </body>
