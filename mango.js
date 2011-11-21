@@ -9,14 +9,130 @@
     comments: /^(\/\/(.+))/
   };
 
-  var KEYWORDS = {
-    keywords: ["const", "undefined", "var", "void", "yield", "delete", "new", "in", "instanceof", "let", "typeof", "this", "prototype", "function", "null", "true", "false", "return"],
-    flow: ["if", "else", "do", "while", "for", "break", "continue", "switch", "case", "default"],
-    exceptions: ["try", "catch", "throw", "with", "finally"],
-    globals: ["Array", "Boolean", "Date", "Function", "Infinity", "JavaArray", "JavaClass", "JavaObject", "JavaPackage", "kind", "Math", "Number", "NaN", "Object", "Packages", "RegExp", "String", "Undefined", "java", "netscape", "sun"],
-    errors: ["Error", "EvalError", "RangeError", "ReferenceError", "SyntaxError", "TypeError", "URIError"],
-    future: ["abstract", "enum", "int", "short", "boolean", "export", "interface", "static", "byte", "extends", "long", "super", "char", "final", "native", "synchronized", "class", "float", "package", "throws", "goto", "private", "transient", "debugger", "implements", "protected", "volatile", "double", "import", "public"],
-    htmlevents: ["onblur", "onclick", "oncontextmenu", "ondblclick", "onfocus", "onkeydown", "onkeypress", "onkeyup", "onmousedown", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onresize"]
+  var keywords = {
+    "const": true,
+    "undefined": true,
+    "var": true,
+    "void": true,
+    "yield": true,
+    "delete": true,
+    "new": true,
+    "in": true,
+    "instanceof": true,
+    "let": true,
+    "typeof": true,
+    "this": true,
+    "prototype": true,
+    "function": true,
+    "null": true,
+    "true": true,
+    "false": true,
+    "return": true
+  };
+
+  var flow = {
+    "if": true,
+    "else": true,
+    "do": true,
+    "while": true,
+    "for": true,
+    "break": true,
+    "continue": true,
+    "switch": true,
+    "case": true,
+    "default": true
+  };
+
+  var exceptions = {
+    "try": true,
+    "catch": true,
+    "throw": true,
+    "with": true,
+    "finally": true
+  };
+
+  var globals = {
+    "Array": true,
+    "Boolean": true,
+    "Date": true,
+    "Function": true,
+    "Infinity": true,
+    "JavaArray": true,
+    "JavaClass": true,
+    "JavaObject": true,
+    "JavaPackage": true,
+    "kind": true,
+    "Math": true,
+    "Number": true,
+    "NaN": true,
+    "Object": true,
+    "Packages": true,
+    "RegExp": true,
+    "String": true,
+    "Undefined": true,
+    "java": true,
+    "netscape": true,
+    "sun": true
+  };
+
+  var errors = {
+    "Error": true,
+    "EvalError": true,
+    "RangeError": true,
+    "ReferenceError": true,
+    "SyntaxError": true,
+    "TypeError": true,
+    "URIError": true
+  };
+
+  var future = {
+    "abstract": true,
+    "enum": true,
+    "int": true,
+    "short": true,
+    "boolean": true,
+    "export": true,
+    "interface": true,
+    "static": true,
+    "byte": true,
+    "extends": true,
+    "long": true,
+    "super": true,
+    "char": true,
+    "final": true,
+    "native": true,
+    "synchronized": true,
+    "class": true,
+    "float": true,
+    "package": true,
+    "throws": true,
+    "goto": true,
+    "private": true,
+    "transient": true,
+    "debugger": true,
+    "implements": true,
+    "protected": true,
+    "volatile": true,
+    "double": true,
+    "import": true,
+    "public": true
+  };
+
+  var htmlevents = {
+    "onblur": true,
+    "onclick": true,
+    "oncontextmenu": true,
+    "ondblclick": true,
+    "onfocus": true,
+    "onkeydown": true,
+    "onkeypress": true,
+    "onkeyup": true,
+    "onmousedown": true,
+    "onmousemove": true,
+    "onmouseout": true,
+    "onmouseover": true,
+    "onmouseup": true,
+    "onresize": true
   };
 
   var Tokens = function () {
@@ -56,20 +172,25 @@
         item = syntax.token.exec(chunk)[1];
 
         // is a keyword
-        if (KEYWORDS.keywords.indexOf(item) !== -1) {
+        if (keywords[item]) {
           token.add("keywords keyword " + item, item);
 
-        } else if (KEYWORDS.flow.indexOf(item) !== -1) {
+        } else if (flow[item]) {
           token.add("keywords conditional " + item, item);
-        } else if (KEYWORDS.exceptions.indexOf(item) !== -1) {
+
+        } else if (exceptions[item]) {
           token.add("keywords exception " + item, item);
-        } else if (KEYWORDS.globals.indexOf(item) !== -1) {
+
+        } else if (globals[item]) {
           token.add("keywords global " + item, item);
-        } else if (KEYWORDS.errors.indexOf(item) !== -1) {
+
+        } else if (errors[item]) {
           token.add("keywords error " + item, item);
-        } else if (KEYWORDS.future.indexOf(item) !== -1) {
+
+        } else if (future[item]) {
           token.add("keywords future " + item, item);
-        } else if (KEYWORDS.htmlevents.indexOf(item) !== -1) {
+
+        } else if (htmlevents[item]) {
           token.add("keywords htmlevent " + item, item);
 
         // is an identifier
@@ -112,7 +233,7 @@
         i += 1;
       }
     }
-  };
+  }
 
   var forEach = Array.prototype.forEach;
   var codes = document.querySelectorAll("code");
